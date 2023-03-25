@@ -1,0 +1,1146 @@
+// Utilities
+$primary-color: rgb(220, 202, 135);
+$secondary-color: #FFFFFF;
+$dash-line-color: #FAFAFA;
+$grey-shade: #AAAAAA;
+// $grey-shade: #ffffff00;
+$main-background: #000000;
+$global-width: 100%;
+$header-font: 'Cormorant Upright', serif;
+$content-font: 'Open Sans', sans-serif;
+$signature-font: 'Bestermind';
+$quote-font: 'Varela Round', sans-serif;
+
+@font-face {
+  font-family: $signature-font;
+  src: url("../fonts/Bestermind-Regular/Bestermind-Regular.ttf");
+}
+
+.hide {
+  display: none;
+}
+
+.disabled {
+  cursor: not-allowed;
+}
+
+// Mixins
+@mixin default-button() {
+  padding: 1rem 1.4rem;
+  color: #0C0B08;
+  border: none;
+  background-color: $primary-color;
+  margin: 1rem;
+  cursor: pointer;
+}
+
+@mixin background-image-styling() {
+  position: relative;
+  background-repeat: no-repeat;
+  background-size: contain;
+  // height: 600px;
+  height: 100%;
+  // width: 600px; 
+  background-size: 100% 100%;
+  // background-attachment: inherit;
+  background-image: url("../assets/image/Mask\ Group.png");
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #0b0b0b;
+    opacity: .5;
+  }
+
+  & > * {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+@mixin banner-header() {
+  font-weight: 700;
+  font-size: 3.5rem;
+  line-height: 1.3;
+  font-family: $header-font;
+}
+
+@mixin banner-content() {
+  margin: 2rem 0;
+  line-height: 1.5;
+  font-size: .9rem;
+}
+
+:root {
+  --angle: 45deg;
+  --opacity: 0.5;
+}
+
+// General Styles
+img {
+  width: 100%;
+  height: 100%;
+}
+
+*, html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  letter-spacing: .07rem;
+  color: $primary-color;
+  font-family: $content-font;
+
+  body {
+    background-color: $main-background;
+    // padding: 0 1rem;
+    font-size: .9rem;
+  }
+}
+
+// Header Styling
+#Header {
+  position: relative;
+  margin-block-start: 1rem;
+  padding: 0 1rem;
+  .Header-mobile-container {
+    color: $secondary-color;
+    text-align: center;
+    position: relative;
+
+    .mobile-logo {
+      color: $secondary-color;
+      font-family: $header-font;
+      text-transform: uppercase;
+    }
+
+    .mobile-navlink-container {
+      margin-block-start: 1rem;
+
+      div {
+        
+
+        &:hover {
+          background-color: $primary-color;
+          transition: all .5s;
+
+          a {
+            color: $main-background;
+          }
+        }
+
+        a {
+          display: inline-block;
+          text-decoration: none;
+          color: $secondary-color;
+          padding: 1rem 5rem;
+          transition: all .5s;
+        }
+      }
+    }
+
+    .hamburger-container{
+      position: absolute;
+      top: 0;
+      left: 0;
+      cursor: pointer;
+    
+      .hamburger-wrapper {
+        display: inline-block;
+        transition: transform 0.3s;
+        span{
+          display: block;
+          width: 30px;
+          height: 3px;
+          background-color: $secondary-color;
+          position: relative;
+          transition: 0.3s;
+          &:before{
+            content: '';
+            width: 30px;
+            height: 3px;
+            background-color: $secondary-color;
+            position: absolute;
+            top: -8px;
+            left: 0;
+          }
+          &:after{
+            content: '';
+            width: 30px;
+            height: 3px;
+            background-color: $secondary-color;
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+          }
+        }
+      }
+    
+      .active-hamburger {
+        transition: transform 0.3s;
+        transform: rotate(360deg);
+          
+          span{
+            background-color: transparent;
+            &:before{
+              top: 0;          
+              transform: rotate(-45deg);
+            }
+            &:after{
+              bottom: 0;
+              transform: rotate(45deg);
+            }
+          }
+      }
+    }
+  }
+
+  .Header-container {
+    display: none;
+  }
+}
+
+// Hero Section Styling, ChefProfile Styling, ContactUsPage
+#Herosection, #ChefProfile, #ContactUsPage {
+  padding: 0 2rem;
+  margin: 3rem 0;
+
+  .herosection-container, .chefprofile-container {
+    display: flex;
+    flex-direction: column;
+
+      .herosection-content, .chefprofile-content {
+        text-align: center;
+  
+        h1 {
+          @include banner-header();
+        }
+  
+        p {
+          @include banner-content();
+        }
+        button {
+          @include default-button();
+        }
+      }
+
+      .herosection-image-container, .chefprofile-image-container {
+        margin: 2rem 0;
+      }
+  }
+}
+
+.herosection-image-wrapper, .chefprofile-image-wrapper {
+  position: relative;
+  margin: auto;
+  border: 1px solid $primary-color;
+  line-height: 0%;
+
+  &::before, &::after {
+    content: "";
+    position: absolute;
+    width: 70%;
+    height: 65%;
+    transition: 0.9s .9s ease-in-out;
+  }
+
+  &::before {
+    bottom: -21px;
+    left: -21px;
+    border-left: 20px solid $primary-color;
+    border-bottom: 20px solid $primary-color;
+  }
+
+  &::after {
+    right: -21px;
+    top: -21px;
+    border-top: 20px solid $primary-color;
+    border-right: 20px solid $primary-color;
+  }
+
+  // &:hover::before, &:hover::after {
+  //   // width: calc(100% + 9px);
+  //   height: calc(100% + 2px);
+  // }
+}
+
+.inview {
+  &::before, &::after {
+    // width: calc(100% + 9px);
+    height: calc(100% + 2px);
+  }
+}
+// AboutUs Styling 
+#AboutUs {
+  padding: 0 2rem;
+
+  @include background-image-styling();
+
+  .about-us-container {
+
+    .about-us-wrapper {
+      text-align: center;
+
+      h1 {
+        @include banner-header();
+      }
+
+      p {
+        @include banner-content();
+      }
+
+      button {
+        @include default-button();
+      }
+
+      img {
+        max-height: 350px;
+        max-width: fit-content;
+        // transition: transform 2s ease;
+      }
+
+      span {
+        font-family: $header-font;
+        color: #272727;
+        font-size: 25rem;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: -1;
+      }
+    }
+  }
+
+}
+
+// SpecialOffers Styling
+#SpecialOffers {
+  text-align: center;
+  padding: 0 2rem;
+
+  .SpecialOffers-container {
+
+    .SpecialOffers-top {
+      margin: 2rem 0;
+
+      h1 {
+        margin: 1rem 0;
+        @include banner-header();
+      }
+
+      h3 {
+        color: $secondary-color;
+        font-family: $header-font;
+      }
+    }
+
+    .SpecialOffers-middle {
+
+      .SpecialOffers-middle-item {
+        h2 {
+          margin: 2rem 0;
+          color: $secondary-color;
+          font-family: $header-font;
+        }
+
+        .SpecialOffers-middle-item-wrapper {
+          margin-block-end: 2.2rem;
+          p {
+            text-align: left;
+            margin: 1rem 0;
+            font-weight: 100;
+          }
+
+          .SpecialOffers-middle-item-list {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            
+            .name {
+              font-family: $header-font;
+              text-align: left;
+              min-width: 8rem;
+            }
+            .dash-line {
+              background-color: $dash-line-color;
+              height: 1px;
+              width: 7rem;
+            }
+
+            .price {
+              color: $secondary-color
+            }
+          }
+        }
+      }
+    }
+
+    .SpecialOffers-bottom {
+      button {
+        @include default-button();
+      }
+    }
+  }
+}
+
+// Chef Profile styling
+#ChefProfile, #ContactUsPage {
+  padding: 0 2rem;
+  margin: 3rem 0 0 0;
+
+  @include background-image-styling();
+}
+  .chefprofile-content {
+    h3 {
+      color: $secondary-color;
+      font-family: $header-font;
+    }
+
+    h2 {
+      font-family: $header-font;
+    }
+
+    .signature {
+      font-family: $signature-font;
+      font-size: 3rem;
+    }
+
+    blockquote {
+      position: relative;
+
+      &::before {
+        display: block;
+        content: "\201C";
+        font-size: 80px;
+        position: absolute;
+        left: -20px;
+        top: -20px;
+        color: $secondary-color;
+        font-family: $quote-font;
+      }
+    }
+  }
+
+
+// VideoPlayer Page Styling
+#VideoPage {
+  .videopage-container {
+    position: relative;
+
+    video {
+      width: 100%;
+      height: 100%;
+    }
+
+    .video-control {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      cursor: pointer;
+    }
+  }
+}
+
+// AwardsPage Styling
+#AwardsPage {
+  @include background-image-styling();
+  
+  .awards-page-container {
+    .round-logo {
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .awards-page-content {
+      .laurel-container {
+        .laurel-header {
+          text-align: center;
+          margin-block-end: 1rem;
+
+          h3 {
+            color: $secondary-color;
+            font-family: $header-font;
+          }
+
+          h1 {
+            @include banner-header();
+          }
+        }
+        .laurel-wrapper {
+          .award-item {
+            display: flex;
+            gap: 5%;
+            margin-block-end: 1rem;
+
+            .award-details {
+              p {
+                margin-top: 1rem;
+              }
+              .name {
+                font-family: $header-font;
+              }
+            }
+          }
+        }
+      }
+
+      .awards-page-image-container {
+        position: relative;
+
+        span {
+          font-family: "Cormorant Upright", serif;
+          color: #FAFAFA;
+          font-size: 25rem;
+          position: absolute;
+          left: 0;
+          bottom: 0;
+        }
+      }
+    }
+    // position: relative;
+    // span {
+    //   height: 200px;
+    //   position: absolute;
+    //   width: 20px;
+    //   left: 0;
+    //   top: 0;
+    //   transform-origin: bottom center;
+    //   font: 26px Monaco, MonoSpace;
+    // }
+    
+    // @for $var from 1 to 21 {
+    //   .char#{$var} {
+    //     transform: rotate(($var * 6) + deg);
+    //   }
+    // }
+  }
+}
+
+// Photo Gallery Styling
+#PhotoGallery {
+  .photogallery-container {
+    text-align: center;
+    margin-block-start: 3rem;
+
+    .photogallery-content {
+      margin-block-end: 2rem;
+
+      h3 {
+        color: $secondary-color;
+        font-family: $header-font;
+      }
+
+      h1 {
+        @include banner-header();
+      }
+
+      button {
+        @include default-button();
+      }
+    }
+
+    .photogallery-image-container {
+      .photogallery-image-wrapper {
+        display: flex;
+        gap: 3%;
+        overflow-x: scroll;
+        scroll-snap-type: x mandatory;
+        
+        div {
+          scroll-snap-align: start;
+        }
+
+        img {
+          width: auto;
+          height: 465px;        
+        }
+      }
+    }
+  }
+}
+
+// ContactUs Page Styling
+
+// Please check ChefProfile Styling, that is is where the style came from
+
+// NewsLetter Styling
+.newsletter-container {
+  padding: 0 1rem;
+  text-align: center;
+  margin: 2rem 0;
+
+  .newsletter-wrapper {
+    h3, p {
+      color: $secondary-color;
+      margin: 1rem 0;
+    }
+    h3, h1 {
+      font-family: $header-font;
+    }
+
+    .newsletter-input-container {
+      button {
+        @include default-button();
+        font-family: $header-font;
+        margin: .8rem 0;
+      }
+
+      input {
+        width: 90%;
+        padding: 1rem;
+        border: 1px solid #F5EFDB;
+        background-color: $main-background;
+        margin: .8rem 0;
+
+        &::placeholder {
+          font-family: $header-font;
+        }
+      }
+    }
+  }
+}
+
+// Footer Styling
+.footer-container {
+  h1,h2,h3 {
+    font-family: $header-font;
+  }
+  text-align: center;
+
+  .footer-contacts-container, .footer-working-hours-container {
+    margin: 2rem 0;
+    h2 {
+      color: #F5EFDB;
+    }
+
+    p {
+      color: $grey-shade;
+    }
+  }
+
+  .footer-logo-container {
+    p {
+      color: $secondary-color;
+    }
+  }
+
+  p, .footer-social-icons {
+    margin: 1rem 0;
+
+    svg {
+      margin-right: 1rem;
+    }
+  }
+}
+#Footer {
+  .creator {
+    color: #F5EFDB;
+    font-family: $header-font;
+  }
+  p {
+    text-align: center;
+  }
+}
+
+// #CategoriesPage
+#CategoriesPage {
+  .categoriespage-container {
+    padding: 0 2rem;
+    text-align: center;
+
+    .categories-header {
+      margin: 3rem 0;
+    }
+
+    h1 {
+      @include banner-header();
+      color: $secondary-color;
+    }
+
+    .categoriespage-wrapper {
+      
+      .category {
+        border: 1px solid #dcca8740;
+        border-radius: 4%;
+        text-decoration: none;
+        margin: 3rem 0;
+        padding: 1.2rem;
+        box-shadow: rgb(255 255 255 / 25%) 0px 2px 5px -1px, rgb(113 113 113 / 30%) 0px 1px 3px -1px;
+
+        a {
+          text-decoration: none;
+          display: block;
+        }
+        
+        img {
+          height: auto;
+          max-width: 100%;
+          max-height: 100%;
+        }
+        button {
+          color: $secondary-color;
+          background-color: transparent;
+          border: none;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+}
+
+// Category Styling
+
+#Category {
+  .category-container {
+    text-align: center;
+    padding: 0 2rem;
+
+    h1 {
+      @include banner-header();
+      color: $secondary-color;
+    }
+
+    h2 {
+      color: $secondary-color;
+      font-family: $header-font;
+    }
+
+    .category-wrapper {
+      .category {
+        margin: 3rem 0;
+        a {
+          text-decoration: none;
+        }
+
+        img {
+          border-radius: 50%;
+        }
+      }
+    }
+
+    button {
+      @include default-button();
+    }
+  }
+}
+
+// MealPage Styling
+
+.meal-history {
+  font-style: italic;
+  margin: 1rem 0;
+}
+.save-for-later {
+  text-align: center;
+
+  button {
+    @include default-button();
+  }
+
+  .disabled {
+    cursor: not-allowed;
+  }
+}
+
+.mealpage-container {
+  padding: 0 2rem;
+
+  .mealpage-wrapper {
+
+    img {
+      height: 20rem;
+      border-radius: 1rem;
+    }
+    h1, h2 {
+      text-align: center;
+      color: $secondary-color;
+      font-family: $header-font;
+      margin: 1rem 0;
+    }
+
+    .meal-ingredients {
+      p {
+        margin-left: 2rem;
+        line-height: 1.5;
+      }
+    }
+
+    .meal-instruction-container {
+      line-height: 1.5;
+      margin-bottom: 2rem;
+    }
+
+    iframe {
+      width: 100%;
+      height: 20rem;
+    }
+  }
+}
+
+// .category-meal-image {
+//   border-radius: 50%;
+// }
+
+// SavedMeals Styling
+#SavedMeal {
+  margin-top: 2rem;
+  .savedmeal-container {
+    text-align: center;
+    padding: 0 2rem;
+
+
+    .savedmeal {
+      padding: 0 2rem;
+      border-radius: 5px;
+      border: 1px solid;
+      margin: 1rem 0;
+      position: relative;
+      
+      svg {
+        cursor: pointer;
+        position: relative;
+        bottom: 0;
+      }
+    }
+
+    h2 {
+      color: $secondary-color;
+      font-family: $header-font;
+      margin: 1rem 0;
+    }
+  }
+}
+
+// Design for Larger Screens
+@media screen and (min-width: 768px) {
+
+  // Header Styling
+  #Header {
+    padding: 0 3rem;
+    .Header-mobile-container {
+      display: none;
+    }
+  
+    .Header-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+
+      h1 {
+        color: $secondary-color;
+        text-transform: uppercase;
+        font-family: $header-font;
+      }
+
+      a {
+        text-decoration: none;
+        color: $secondary-color;
+        transition: color .3s;
+
+        &:hover {
+          color: $primary-color;
+        }
+      }
+
+      .large-screen-navlink-container {
+        display: flex;
+
+        div {
+          margin: .4rem .5rem 0 0;
+        }
+        div:nth-last-child(1), div:nth-last-child(2) {
+          display: none;
+        }
+      }
+
+      .login-reg-container {
+        display: flex;
+        justify-content: flex-end;
+
+        div {
+          margin: .4rem .5rem 0 0;
+        }
+      }
+    }
+  }
+
+  // HeroSection Styling
+  #Herosection {
+    // padding: 0 8rem;
+    // margin: 5rem 0 8rem 0;
+    padding: 0 8rem 10rem 8rem;
+    
+    .herosection-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5%;
+
+      .herosection-content {
+        text-align: left;
+
+        button {
+          margin-left: 0;
+        }
+      }
+    }
+  }
+
+  // AboutUs Styling
+  #AboutUs {
+    padding: 2rem 5rem;
+
+    .about-us-container {
+      display: grid;
+      grid-template-columns: 1fr .8fr 1fr;
+
+      .about-us-wrapper {
+
+        &:nth-child(1) {
+          text-align: right;
+
+          button {
+            margin-right: 0;
+          }
+        }
+
+        &:nth-child(3) {
+          text-align: left;
+
+          button {
+            margin-left: 0;
+          }
+        }
+
+        img {
+          max-height: 450px;
+          top: -40px;
+          position: relative;
+        }
+      }
+    }
+  }
+
+  // Special Offer Styling
+  #SpecialOffers {
+    padding: 2rem 5rem;
+
+    .SpecialOffers-container {
+      .SpecialOffers-middle {
+        display: grid;
+        grid-template-columns: .8fr 1fr .8fr;
+
+        .SpecialOffers-middle-item {
+          .SpecialOffers-middle-item-wrapper {
+            .SpecialOffers-middle-item-list {
+              gap: 2%;
+              .dash-line {
+                width: 5rem;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
+// ChefProfile Styling
+  #ChefProfile, #ContactUsPage {
+    .chefprofile-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10%;
+      // padding: 5rem 0 5rem 0;
+      padding: 5rem;
+
+      .chefprofile-content {
+        text-align: left;
+      }
+      
+    }
+  }
+
+  // VideoPage Styling
+  // No stlyes needed here
+
+  //AwardsPage
+  #AwardsPage {
+    .awards-page-container {
+      .round-logo {
+        text-align: left;
+      }
+
+      .awards-page-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 5%;
+        padding: 0 5rem;
+
+        .laurel-container {
+          .laurel-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5%;
+
+            .award-item {
+              margin-block-end: 2rem;
+            }
+          }
+        }
+      }
+    }
+  }
+
+    //PhotoGallery Styling
+  #PhotoGallery {
+    .photogallery-container {
+      display: grid;
+      grid-template-columns: 1fr 1.8fr;
+      padding: 5rem 0 5rem 3rem;
+      gap: 2%;
+      text-align: left;
+      align-items: center;
+
+      p {
+        margin: 1rem 0;
+      }
+
+      .photogallery-content {
+        button {
+          margin-left: 0;
+        }
+      }
+
+      .photogallery-image-container {
+        overflow-x: scroll;
+      }
+    }
+  }
+
+  // ContactUs Page Styling
+   //Refer to ChefProfile Styling
+
+  //NewsLetter Styling
+  .newsletter-container {
+    padding: 0 8rem;
+    // text-align: center;
+    // margin: 2rem 0;
+  
+    .newsletter-wrapper {
+      text-align: center;
+      border: 1px solid rgba(220, 202, 135, 0.200);
+  
+      .newsletter-input-container {
+        display: flex;
+        gap: 2%;
+        padding: 0 17%;
+      }
+    }
+  }
+
+  // Footer Styling
+  #Footer {
+    text-align: center;
+    margin-block-start: 5rem;
+
+    .footer-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+
+      .footer-logo-container {
+        grid-row: 1;
+        grid-column: 2;
+        margin: 2rem 0;
+      }
+    }
+
+    p {
+      margin: 1rem 0;
+    }
+  }
+
+  // #CategoriesPage
+  #CategoriesPage {
+    .categoriespage-container {
+      padding: 0 4rem;
+      .categoriespage-wrapper {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+
+        .category {
+          margin: 0;
+        }
+      }
+    }
+
+  }
+
+  #Category {
+    .category-container {
+      padding: 0 4rem;
+      .category-wrapper {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+        .category {
+          img {
+            height: auto;
+          }
+        }
+      }
+    }
+  }
+
+  // MealPage Styling
+
+  .mealpage-container {
+    padding: 0 15%;
+
+    .mealpage-wrapper {
+
+      img {
+        height: 30rem;
+      }
+
+      iframe {
+        height: 25rem;
+      }
+    }
+  }
+
+  // SavedMeals Styling
+  #SavedMeal {
+    .savedmeal-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      padding: 0 5rem;
+
+      .savedmeal {
+        padding: 2rem;
+        border-radius: 5px;
+        border: 1px solid;
+        margin: 1rem 0;
+        position: relative;
+      
+        svg {
+          cursor: pointer;
+          position: absolute;
+          top: 1%;
+          right: 0;
+        }
+
+        img {
+          width: 100%;
+          height: auto;
+        }
+      }
+    }
+  }
+
+}
